@@ -519,26 +519,46 @@ class My_Fringe:
         self.ABIERTA = []
         self.start = 0
         self.visitados = []
-        self.nodos_no_visit = []
 
     def append(self, node):
         self.ABIERTA.append(node)
         self.visitados.append(node)
+        print("ESTA ES LA LISTA _ANTES_ DE EL EXTEND:")
+        print(self.ABIERTA)
 
     def pop(self):
         node = self.ABIERTA[0]
         self.ABIERTA.pop(0)
-        self.cost = node.path_cost #probando
+        self.cost = node.path_cost  # probando
 
         return node
 
     def extend(self, hijos):
+        nodos_no_visitados = []
+        print("HIJOS:")
+        print(hijos)
+        print("ESTA ES LA LISTA _ANTES_ DE EL EXTEND:")
+        print(self.ABIERTA)
+        """
         for i in range(len(hijos)):
             hijos[i].path_cost += self.cost
-            if hijos[i] not in self.visitados:
-                self.nodos_no_visit.append(hijos[i])
-        self.ABIERTA.extend(self.nodos_no_visit)
+            for j in range(len(self.visitados)):
+                if hijos[i].state == self.visitados[j].state:
+                    continue
+                else:
+                    nodos_no_visitados.append(hijos[i])
+        """
+        for i in range(len(self.visitados)):
+            for j in range(len(hijos)):
+                if hijos[j].state == self.visitados[i].state:
+                    continue
+                else:
+                    #hijos[j].path_cost += self.cost
+                    nodos_no_visitados.append(hijos[j])
+
+        self.ABIERTA.extend(nodos_no_visitados)
         self.ABIERTA = sorted(self.ABIERTA, key=lambda node: node.path_cost)
+        print("ESTA ES LA LISTA DESPUES DE EL EXTEND:")
         print(self.ABIERTA)
 
 

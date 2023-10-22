@@ -12,9 +12,9 @@ ab = search.GPSProblem('A', 'B'
 
 #   Ramificación y acotación
 print(search.branch_and_bound(ab).path())
-lista = [1,9123,3,4]
+lista = [9123,3,4]
 lista= sorted(lista, key=lambda node: node)
-print(lista)
+
 
 # Result:
 # [<Node B>, <Node P>, <Node R>, <Node S>, <Node A>] : 101 + 97 + 80 + 140 = 418
