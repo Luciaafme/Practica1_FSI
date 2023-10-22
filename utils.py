@@ -514,21 +514,40 @@ class Queue:
             self.append(item)
 
 
-def My_Fringe():
+class My_Fringe:
     def __init__(self):
         self.ABIERTA = []
         self.start = 0
+        self.visitados = []
+        self.nodos_no_visit = []
 
-    def append(self, nodo):
-        self.ABIERTA.append(nodo)
-
-    def extend(self, nodos):
-        self.ABIERTA.extend(nodos)
-        self.ABIERTA.remove(0)
-        self.ABIERTA = sorted(self.ABIERTA, key=lambda node: node.path_cost, reverse=True)
+    def append(self, node):
+        self.ABIERTA.append(node)
+        self.visitados.append(node)
 
     def pop(self):
-        pass
+        node = self.ABIERTA[0]
+        self.ABIERTA.pop(0)
+        self.cost = node.path_cost #probando
+
+        return node
+
+    def extend(self, hijos):
+        for i in range(len(hijos)):
+            hijos[i].path_cost += self.cost
+            if hijos[i] not in self.visitados:
+                self.nodos_no_visit.append(hijos[i])
+        self.ABIERTA.extend(self.nodos_no_visit)
+        self.ABIERTA = sorted(self.ABIERTA, key=lambda node: node.path_cost)
+        print(self.ABIERTA)
+
+
+
+
+
+
+
+
 
 
 
