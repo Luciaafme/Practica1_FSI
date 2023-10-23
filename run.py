@@ -9,7 +9,6 @@ ab = search.GPSProblem('A', 'B'
 print(search.breadth_first_graph_search(ab).path())
 #   Profundidad
 print(search.depth_first_graph_search(ab).path())
-
 #   Ramificación y acotación
 print(search.branch_and_bound(ab).path())
 
