@@ -523,9 +523,6 @@ class My_Fringe:
     def append(self, node):
         self.ABIERTA.append(node)
         self.visitados.append(node)
-        print("ESTA ES LA LISTA _ANTES_ DE EL EXTEND:")
-        print(self.ABIERTA)
-        print(self.ABIERTA[-1])
 
     def pop(self):
         node = self.ABIERTA[0]
@@ -537,22 +534,6 @@ class My_Fringe:
 
     def extend(self, hijos):
 
-        print("HIJOS:")
-        print(hijos)
-        print("ESTA ES LA LISTA _ANTES_ DE EL EXTEND:")
-        print(self.ABIERTA)
-        if (len(self.ABIERTA) > 4):
-            print(self.ABIERTA[-3])
-
-        """
-        for i in range(len(hijos)):
-            hijos[i].path_cost += self.cost
-            for j in range(len(self.visitados)):
-                if hijos[i].state == self.visitados[j].state:
-                    continue
-                else:
-                    nodos_no_visitados.append(hijos[i])
-        """
         nodos_no_visitados = []
         for hijo in hijos:
             nodo_repetido = False
@@ -563,15 +544,9 @@ class My_Fringe:
             if not nodo_repetido:
                 nodos_no_visitados.append(hijo)
 
-                #problema está aquí pq se añade varias veces
-
         self.ABIERTA.extend(nodos_no_visitados)
         self.ABIERTA = sorted(self.ABIERTA, key=lambda node: node.path_cost)
-        print("ESTA ES LA LISTA DESPUES DE EL EXTEND:")
-        print(self.ABIERTA)
-        if (len(self.ABIERTA) > 4 ):
-            print("HELPPPPPPPPPPP")
-            print(self.ABIERTA[-4].path_cost)
+
 
 
 def Stack():
