@@ -11,6 +11,8 @@ print(search.breadth_first_graph_search(ab).path())
 print(search.depth_first_graph_search(ab).path())
 #   Ramificación y acotación
 print(search.branch_and_bound(ab).path())
+#   Ramificación y acotación Subestimación
+print(search.branch_and_bound_subestimacion(ab).path())
 
 
 # Result:

@@ -1,3 +1,4 @@
+import math
 
 #______________________________________________________________________________
 # Simple Data Structures: infinity, Dict, Struct
@@ -576,6 +577,47 @@ class FIFOQueue(Queue):
             self.A = self.A[self.start:]
             self.start = 0
         return e
+
+class My_Fringe_Subestimacion:
+    def __init__(self, problem):
+        self.ABIERTA = []
+        self.visitados = []
+        self.problem = problem
+
+    def append(self, node):
+        self.ABIERTA.append(node)
+
+    def pop(self):
+        node = self.ABIERTA[0]
+        self.node = node
+        self.ABIERTA.pop(0)
+
+        return node
+
+    def extend(self, hijos):
+        """
+        lista = []
+        nodos_no_visitados = []
+        for hijo in hijos:
+            nodo_repetido = False
+            for visitado in self.visitados:
+                if hijo.state == visitado.state:
+                    nodo_repetido = True
+                    break  # Salir del bucle si se encuentra un nodo repetido
+            if not nodo_repetido:
+                lista.append(self.problem.h(hijo))
+                hijo.add_to_path_cost(self.problem.h(hijo))
+                nodos_no_visitados.append(hijo)
+        """
+        nodos_no_visitados = []
+        for hijo in hijos:
+            if str(hijo) != str(self.node.parent):
+                hijo.add_to_path_cost(self.problem.h(hijo))
+                nodos_no_visitados.append(hijo)
+        self.ABIERTA.extend(nodos_no_visitados)
+        self.ABIERTA = sorted(self.ABIERTA, key=lambda node: node.path_cost)
+
+
 
 
 

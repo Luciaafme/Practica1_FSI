@@ -95,6 +95,9 @@ class Node:
     def cost_of_path(self):
         return self.path_cost
 
+    def add_to_path_cost(self, heuristica):
+        self.path_cost += heuristica
+
 
 # ______________________________________________________________________________
 ## Uninformed Search algorithms
@@ -127,6 +130,9 @@ def depth_first_graph_search(problem):
 
 def branch_and_bound(problem):
     return graph_search(problem, My_Fringe())
+
+def branch_and_bound_subestimacion(problem):
+    return graph_search(problem, My_Fringe_Subestimacion(problem))
 
 
 # _____________________________________________________________________________
