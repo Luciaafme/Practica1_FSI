@@ -526,14 +526,14 @@ class My_Fringe:
 
     def pop(self):
         node = self.ABIERTA[0]
-        self.ABIERTA.pop(0)
+        self.node = self.ABIERTA.pop(0)
         self.cost = node.path_cost  # probando
         self.visitados.append(node)
 
         return node
 
     def extend(self, hijos):
-
+        """
         nodos_no_visitados = []
         for hijo in hijos:
             nodo_repetido = False
@@ -546,7 +546,13 @@ class My_Fringe:
 
         self.ABIERTA.extend(nodos_no_visitados)
         self.ABIERTA = sorted(self.ABIERTA, key=lambda node: node.path_cost)
-
+        """
+        nodos_no_visitados = []
+        for hijo in hijos:
+            if str(hijo) != str(self.node.parent):
+                nodos_no_visitados.append(hijo)
+        self.ABIERTA.extend(nodos_no_visitados)
+        self.ABIERTA = sorted(self.ABIERTA, key=lambda node: node.path_cost)
 
 
 def Stack():
