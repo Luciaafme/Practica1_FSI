@@ -517,7 +517,6 @@ class Queue:
 class My_Fringe:
     def __init__(self):
         self.ABIERTA = []
-        self.start = 0
         self.visitados = []
 
     def append(self, node):
