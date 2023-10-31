@@ -26,7 +26,7 @@ problem2 = search.GPSProblem('NSW', 'NT'
                        , search.australia)
 print("\nProblem 2: From NSW to NT (Australia Map)")
 #   Anchura-amplitud
-print(search.breadth_first_graph_search(problem2).path() + " ")
+print(search.breadth_first_graph_search(problem2).path())
 #   Profundidad
 print(search.depth_first_graph_search(problem2).path())
 #   Ramificación y acotación

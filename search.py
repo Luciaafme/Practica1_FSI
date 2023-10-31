@@ -70,7 +70,7 @@ class Node:
         update(self, state=state, parent=parent, action=action,
                path_cost=path_cost, depth=0)
 
-        self.path_cost = path_cost #done por nosotros
+        #self.path_cost = path_cost
 
         if parent:
             self.depth = parent.depth + 1
