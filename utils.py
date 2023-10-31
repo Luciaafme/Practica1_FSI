@@ -518,19 +518,13 @@ class Queue:
 class My_Fringe:
     def __init__(self):
         self.ABIERTA = []
-        self.visitados = []
 
     def append(self, node):
         self.ABIERTA.append(node)
-        self.visitados.append(node)
 
     def pop(self):
-        node = self.ABIERTA[0]
         self.node = self.ABIERTA.pop(0)
-        self.cost = node.path_cost  # probando
-        self.visitados.append(node)
-
-        return node
+        return self.node
 
     def extend(self, hijos):
         """
@@ -587,18 +581,14 @@ class FIFOQueue(Queue):
 class My_Fringe_Subestimacion:
     def __init__(self, problem):
         self.ABIERTA = []
-        self.visitados = []
         self.problem = problem
 
     def append(self, node):
         self.ABIERTA.append(node)
 
     def pop(self):
-        node = self.ABIERTA[0]
-        self.node = node
-        self.ABIERTA.pop(0)
-
-        return node
+        self.node = self.ABIERTA.pop(0)
+        return self.node
 
     def extend(self, hijos):
         """
