@@ -515,6 +515,36 @@ class Queue:
             self.append(item)
 
 
+def Stack():
+    """Return an empty list, suitable as a Last-In-First-Out Queue."""
+    return []
+
+
+class FIFOQueue(Queue):
+    """A First-In-First-Out Queue."""
+
+    def __init__(self):
+        self.A = []
+        self.start = 0
+
+    def append(self, item):
+        self.A.append(item)
+
+    def __len__(self):
+        return len(self.A) - self.start
+
+    def extend(self, items):
+        self.A.extend(items)
+
+    def pop(self):
+        e = self.A[self.start]
+        self.start += 1
+        if self.start > 5 and self.start > len(self.A) / 2:
+            self.A = self.A[self.start:]
+            self.start = 0
+        return e
+
+#SIN HEURÍSTICA
 class My_Fringe:
     def __init__(self):
         self.ABIERTA = []
@@ -548,36 +578,7 @@ class My_Fringe:
         self.ABIERTA.extend(nodos_no_visitados)
         self.ABIERTA = sorted(self.ABIERTA, key=lambda node: node.path_cost)
 
-
-def Stack():
-    """Return an empty list, suitable as a Last-In-First-Out Queue."""
-    return []
-
-
-class FIFOQueue(Queue):
-    """A First-In-First-Out Queue."""
-
-    def __init__(self):
-        self.A = []
-        self.start = 0
-
-    def append(self, item):
-        self.A.append(item)
-
-    def __len__(self):
-        return len(self.A) - self.start
-
-    def extend(self, items):
-        self.A.extend(items)
-
-    def pop(self):
-        e = self.A[self.start]
-        self.start += 1
-        if self.start > 5 and self.start > len(self.A) / 2:
-            self.A = self.A[self.start:]
-            self.start = 0
-        return e
-
+#CON HEURÍSTICA
 class My_Fringe_Subestimacion:
     def __init__(self, problem):
         self.ABIERTA = []
