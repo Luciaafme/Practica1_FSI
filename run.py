@@ -22,9 +22,9 @@ print(search.branch_and_bound_subestimacion(problem1).path())
 # [<Node B>, <Node F>, <Node S>, <Node A>] :
 
 
-problem2 = search.GPSProblem('NSW', 'NT'
-                       , search.australia)
-print("\nProblem 2: From NSW to NT (Australia Map)")
+problem2 = search.GPSProblem('O', 'E'
+                       , search.romania)
+print("\nProblem 2: From Oradea to Eforie (Romania Map)")
 #   Anchura-amplitud
 print(search.breadth_first_graph_search(problem2).path())
 #   Profundidad
@@ -33,3 +33,42 @@ print(search.depth_first_graph_search(problem2).path())
 print(search.branch_and_bound(problem2).path())
 #   Ramificación y acotación Subestimación
 print(search.branch_and_bound_subestimacion(problem2).path())
+
+
+problem3 = search.GPSProblem('G', 'Z'
+                       , search.romania)
+print("\nProblem 3: From Giurgiu to Zerind (Romania Map)")
+#   Anchura-amplitud
+print(search.breadth_first_graph_search(problem3).path())
+#   Profundidad
+print(search.depth_first_graph_search(problem3).path())
+#   Ramificación y acotación
+print(search.branch_and_bound(problem3).path())
+#   Ramificación y acotación Subestimación
+print(search.branch_and_bound_subestimacion(problem3).path())
+
+
+problem4 = search.GPSProblem('N', 'D'
+                       , search.romania)
+print("\nProblem 4: From Neamt to Dobreta (Romania Map)")
+#   Anchura-amplitud
+print(search.breadth_first_graph_search(problem4).path())
+#   Profundidad
+print(search.depth_first_graph_search(problem4).path())
+#   Ramificación y acotación
+print(search.branch_and_bound(problem4).path())
+#   Ramificación y acotación Subestimación
+print(search.branch_and_bound_subestimacion(problem4).path())
+
+
+problem5 = search.GPSProblem('M', 'F'
+                       , search.romania)
+print("\nProblem 5: From Mehadia to Fagaras (Romania Map)")
+#   Anchura-amplitud
+print(search.breadth_first_graph_search(problem5).path())
+#   Profundidad
+print(search.depth_first_graph_search(problem5).path())
+#   Ramificación y acotación
+print(search.branch_and_bound(problem5).path())
+#   Ramificación y acotación Subestimación
+print(search.branch_and_bound_subestimacion(problem5).path())
