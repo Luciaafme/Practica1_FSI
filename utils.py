@@ -1,5 +1,9 @@
 import math
 
+import abstract
+
+import search
+
 #______________________________________________________________________________
 # Simple Data Structures: infinity, Dict, Struct
 
@@ -515,104 +519,132 @@ class Queue:
             self.append(item)
 
 
-def Stack():
+class Stack:
     """Return an empty list, suitable as a Last-In-First-Out Queue."""
-    return []
+    def __init__(self):
+        self.lista = []
 
+    def append(self, node):
+        self.lista.append(node)
 
-class FIFOQueue(Queue):
+    def extend(self, nodes):
+        self.lista.extend(nodes)
+
+    def pop(self):
+        return self.lista.pop()
+
+class FIFOQueue:
     """A First-In-First-Out Queue."""
 
     def __init__(self):
         self.A = []
         self.start = 0
+        self.nodos_expandidos = 0
+        self.nodos_visitados = 0
 
     def append(self, item):
         self.A.append(item)
+        self.nodos_visitados += 1
 
     def __len__(self):
         return len(self.A) - self.start
 
     def extend(self, items):
         self.A.extend(items)
+        self.nodos_visitados += len(items)
 
     def pop(self):
         e = self.A[self.start]
         self.start += 1
+        self.nodos_expandidos += 1
         if self.start > 5 and self.start > len(self.A) / 2:
             self.A = self.A[self.start:]
             self.start = 0
         return e
 
+    def getInfo(self):
+        print("\tStats:\n")
+        print("\t\t-Nodos visitados: ", self.nodos_visitados)
+        print("\t\t-Nodos expandidos: ", self.nodos_expandidos)
+
+
+
+
+
 #SIN HEURÍSTICA
 class My_Fringe:
-    def __init__(self):
-        self.ABIERTA = []
+    def __init__(self, problem):
+        self.abierta = []
+        self.problem = problem
+        self.expandidos = set()
+        self.visitados = set()
+        self.expandidosTotal = []
+        self.visitadosTotal = []
 
     def append(self, node):
-        self.ABIERTA.append(node)
+        self.abierta.append(node)
+        self.expandidos.add(node.state)
+        self.expandidosTotal.append(node.state)
 
     def pop(self):
-        self.node = self.ABIERTA.pop(0)
-        return self.node
+        node = self.abierta.pop(0)
+        self.visitados.add(node.state)
+        self.visitadosTotal.append(node.state)
+        return node
 
     def extend(self, hijos):
-        """
-        nodos_no_visitados = []
+        self.abierta.extend(hijos)
+        self.abierta = sorted(self.abierta, key=lambda node: node.path_cost)
         for hijo in hijos:
-            nodo_repetido = False
-            for visitado in self.visitados:
-                if hijo.state == visitado.state:
-                    nodo_repetido = True
-                    break  # Salir del bucle si se encuentra un nodo repetido
-            if not nodo_repetido:
-                nodos_no_visitados.append(hijo)
+            self.expandidos.add(hijo.state)
+            self.expandidosTotal.append(hijo.state)
 
-        self.ABIERTA.extend(nodos_no_visitados)
-        self.ABIERTA = sorted(self.ABIERTA, key=lambda node: node.path_cost)
-        """
-        nodos_no_visitados = []
-        for hijo in hijos:
-            if str(hijo) != str(self.node.parent):
-                nodos_no_visitados.append(hijo)
-        self.ABIERTA.extend(nodos_no_visitados)
-        self.ABIERTA = sorted(self.ABIERTA, key=lambda node: node.path_cost)
+    def getInfo(self):
+        print("\tStats:\n")
+        print("\t\t-Nodos visitados: ", len(self.visitados))
+        print("\t\t-Nodos visitados total: ", len(self.visitadosTotal))
+        print("\t\t-Nodos expandidos: ", len(self.expandidos))
+        print("\t\t-Nodos expandidos total: ", len(self.expandidosTotal))
+
+
 
 #CON HEURÍSTICA
 class My_Fringe_Subestimacion:
     def __init__(self, problem):
-        self.ABIERTA = []
+        self.abierta = []
         self.problem = problem
+        self.expandidos = set()
+        self.visitados = set()
+        self.expandidosTotal = []
+        self.visitadosTotal = []
 
     def append(self, node):
-        self.ABIERTA.append(node)
+        self.abierta.append(node)
+        self.expandidos.add(node.state)
+        self.expandidosTotal.append(node.state)
 
     def pop(self):
-        self.node = self.ABIERTA.pop(0)
-        return self.node
+        node = self.abierta.pop(0)
+        self.visitados.add(node.state)
+        self.visitadosTotal.append(node.state)
+        return node
 
     def extend(self, hijos):
-        """
-        lista = []
-        nodos_no_visitados = []
+        self.abierta.extend(hijos)
+        self.abierta = sorted(self.abierta, key=lambda node: node.path_cost + self.problem.h(node))
         for hijo in hijos:
-            nodo_repetido = False
-            for visitado in self.visitados:
-                if hijo.state == visitado.state:
-                    nodo_repetido = True
-                    break  # Salir del bucle si se encuentra un nodo repetido
-            if not nodo_repetido:
-                lista.append(self.problem.h(hijo))
-                hijo.add_to_path_cost(self.problem.h(hijo))
-                nodos_no_visitados.append(hijo)
-        """
-        nodos_no_visitados = []
-        for hijo in hijos:
-            if str(hijo) != str(self.node.parent):
-                hijo.add_to_path_cost(self.problem.h(hijo))
-                nodos_no_visitados.append(hijo)
-        self.ABIERTA.extend(nodos_no_visitados)
-        self.ABIERTA = sorted(self.ABIERTA, key=lambda node: node.path_cost)
+            self.expandidos.add(hijo.state)
+            self.expandidosTotal.append(hijo.state)
+
+    def getInfo(self):
+        print("\tStats:\n")
+        print("\t\t-Nodos visitados: ", len(self.visitados))
+        print("\t\t-Nodos visitados total: ", len(self.visitadosTotal))
+        print("\t\t-Nodos expandidos: ", len(self.expandidos))
+        print("\t\t-Nodos expandidos total: ", len(self.expandidosTotal))
+
+
+
 
 
 ## Fig: The idea is we can define things like Fig[3,10] later.

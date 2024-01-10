@@ -92,11 +92,8 @@ class Node:
                      problem.path_cost(self.path_cost, self.state, act, next))
                 for (act, next) in problem.successor(self.state)]
 
-    def cost_of_path(self):
+    def get_path_cost(self):
         return self.path_cost
-
-    def add_to_path_cost(self, heuristica):
-        self.path_cost += heuristica
 
 
 # ______________________________________________________________________________
@@ -120,7 +117,10 @@ def graph_search(problem, fringe):
 
 def breadth_first_graph_search(problem):
     """Search the shallowest nodes in the search tree first. [p 74]"""
-    return graph_search(problem, FIFOQueue())  # FIFOQueue -> fringe
+    queue = FIFOQueue()
+    search = graph_search(problem, queue)
+    queue.getInfo()
+    return search
 
 
 def depth_first_graph_search(problem):
@@ -129,10 +129,16 @@ def depth_first_graph_search(problem):
 
 
 def branch_and_bound(problem):
-    return graph_search(problem, My_Fringe())
+    cola = My_Fringe(problem)
+    search = graph_search(problem, cola)
+    print(cola.getInfo())
+    return search
 
 def branch_and_bound_subestimacion(problem):
-    return graph_search(problem, My_Fringe_Subestimacion(problem))
+    cola = My_Fringe_Subestimacion(problem)
+    search = graph_search(problem, cola)
+    print(cola.getInfo())
+    return search
 
 
 # _____________________________________________________________________________
