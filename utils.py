@@ -523,15 +523,36 @@ class Stack:
     """Return an empty list, suitable as a Last-In-First-Out Queue."""
     def __init__(self):
         self.lista = []
+        self.visitados = set()
+        self.visitadosTotal = []
+        self.expandidos = set()
+        self.expandidosTotal = []
 
     def append(self, node):
         self.lista.append(node)
+        self.expandidos.add(node.state)
+        self.expandidosTotal.append(node.state)
 
     def extend(self, nodes):
         self.lista.extend(nodes)
+        for node in nodes:
+            self.expandidos.add(node.state)
+            self.expandidosTotal.append(node.state)
 
     def pop(self):
-        return self.lista.pop()
+        node = self.lista.pop()
+        self.visitados.add(node.state)
+        self.visitadosTotal.append(node.state)
+        return node
+
+    def getInfo(self):
+        print("\tStats:\n")
+        print("\t\t-Nodos visitados: ", len(self.visitados))
+        print("\t\t-Nodos visitados total: ", len(self.visitadosTotal))
+        print("\t\t-Nodos expandidos: ", len(self.expandidos))
+        print("\t\t-Nodos expandidos total: ", len(self.expandidosTotal))
+
+
 
 class FIFOQueue:
     """A First-In-First-Out Queue."""

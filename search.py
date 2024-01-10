@@ -125,7 +125,10 @@ def breadth_first_graph_search(problem):
 
 def depth_first_graph_search(problem):
     """Search the deepest nodes in the search tree first. [p 74]"""
-    return graph_search(problem, Stack())
+    queue = Stack()
+    search = graph_search(problem, queue)
+    queue.getInfo()
+    return search
 
 
 def branch_and_bound(problem):
