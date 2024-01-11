@@ -519,6 +519,49 @@ class Queue:
             self.append(item)
 
 
+class FIFOQueue:
+    """A First-In-First-Out Queue."""
+
+    def __init__(self):
+        self.A = []
+        self.start = 0
+        self.expandidos = set()
+        self.visitados = set()
+        self.expandidosTotal = []
+        self.visitadosTotal = []
+
+    def append(self, node):
+        self.A.append(node)
+        self.expandidos.add(node.state)
+        self.expandidosTotal.append(node.state)
+
+    def __len__(self):
+        return len(self.A) - self.start
+
+    def extend(self, nodes):
+        self.A.extend(nodes)
+        for node in nodes:
+            self.expandidos.add(node.state)
+            self.expandidosTotal.append(node.state)
+
+    def pop(self):
+        e = self.A[self.start]
+        self.start += 1
+        self.visitados.add(e.state)
+        self.visitadosTotal.append(e.state)
+        if self.start > 5 and self.start > len(self.A) / 2:
+            self.A = self.A[self.start:]
+            self.start = 0
+        return e
+
+    def getInfo(self):
+        print("\tResultados:\n")
+        print("\t\t-Nodos visitados: ", len(self.visitados))
+        print("\t\t-Nodos visitados total: ", len(self.visitadosTotal))
+        print("\t\t-Nodos expandidos: ", len(self.expandidos))
+        print("\t\t-Nodos expandidos total: ", len(self.expandidosTotal))
+
+
 class Stack:
     """Return an empty list, suitable as a Last-In-First-Out Queue."""
     def __init__(self):
@@ -546,50 +589,11 @@ class Stack:
         return node
 
     def getInfo(self):
-        print("\tStats:\n")
+        print("\tResultados:\n")
         print("\t\t-Nodos visitados: ", len(self.visitados))
         print("\t\t-Nodos visitados total: ", len(self.visitadosTotal))
         print("\t\t-Nodos expandidos: ", len(self.expandidos))
         print("\t\t-Nodos expandidos total: ", len(self.expandidosTotal))
-
-
-
-class FIFOQueue:
-    """A First-In-First-Out Queue."""
-
-    def __init__(self):
-        self.A = []
-        self.start = 0
-        self.nodos_expandidos = 0
-        self.nodos_visitados = 0
-
-    def append(self, item):
-        self.A.append(item)
-        self.nodos_visitados += 1
-
-    def __len__(self):
-        return len(self.A) - self.start
-
-    def extend(self, items):
-        self.A.extend(items)
-        self.nodos_visitados += len(items)
-
-    def pop(self):
-        e = self.A[self.start]
-        self.start += 1
-        self.nodos_expandidos += 1
-        if self.start > 5 and self.start > len(self.A) / 2:
-            self.A = self.A[self.start:]
-            self.start = 0
-        return e
-
-    def getInfo(self):
-        print("\tStats:\n")
-        print("\t\t-Nodos visitados: ", self.nodos_visitados)
-        print("\t\t-Nodos expandidos: ", self.nodos_expandidos)
-
-
-
 
 
 #SIN HEURÍSTICA
@@ -663,9 +667,6 @@ class My_Fringe_Subestimacion:
         print("\t\t-Nodos visitados total: ", len(self.visitadosTotal))
         print("\t\t-Nodos expandidos: ", len(self.expandidos))
         print("\t\t-Nodos expandidos total: ", len(self.expandidosTotal))
-
-
-
 
 
 ## Fig: The idea is we can define things like Fig[3,10] later.
