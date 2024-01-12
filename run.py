@@ -2,14 +2,6 @@
 
 import search
 
-def getTotalCost(list):
-    totalCost = 0
-    for node in list:
-        totalCost += node.get_path_cost()
-        print(node)
-        print(node.get_path_cost())
-    return totalCost
-
 problem1 = search.GPSProblem('A', 'B'
                        , search.romania)
 print("***Problem 1: From A to B (Romania Map)***")
@@ -28,15 +20,15 @@ print(busquedaPorProfundidad, "\n\n")
 
 #   Ramificación y acotación
 print("---Busqueda por Ramificación y acotación SIN heurística---")
-busquedaPorAnchuraAmplitud = search.branch_and_bound(problem1).path()
-print("\t\t-Coste total:", busquedaPorAnchuraAmplitud[0].get_path_cost())
-print(busquedaPorAnchuraAmplitud)
+busquedaPorRamificacionAcotacion = search.branch_and_bound(problem1).path()
+print("\t\t-Coste total:", busquedaPorRamificacionAcotacion[0].get_path_cost())
+print(busquedaPorRamificacionAcotacion)
 
 #   Ramificación y acotación Subestimación
 print("\n---Busqueda por Ramificación y acotación CON heurística---")
-busquedaPorAnchuraAmplitudConHeuristica = search.branch_and_bound_subestimacion(problem1).path()
-print("\t\t-Coste total:", busquedaPorAnchuraAmplitudConHeuristica[0].get_path_cost())
-print(busquedaPorAnchuraAmplitudConHeuristica)
+busquedaPorRamificacionAcotacionConHeuristica = search.branch_and_bound_subestimacion(problem1).path()
+print("\t\t-Coste total:", busquedaPorRamificacionAcotacionConHeuristica[0].get_path_cost())
+print(busquedaPorRamificacionAcotacionConHeuristica)
 # Result:
 
 # [<Node B>, <Node F>, <Node S>, <Node A>] : 211 + 99 + 140 = 450
@@ -62,15 +54,15 @@ print(busquedaPorProfundidad, "\n\n")
 
 #   Ramificación y acotación
 print("---Busqueda por Ramificación y acotación SIN heurística---")
-busquedaPorAnchuraAmplitud = search.branch_and_bound(problem2).path()
-print("\t\t-Coste total:", busquedaPorAnchuraAmplitud[0].get_path_cost())
-print(busquedaPorAnchuraAmplitud)
+busquedaPorRamificacionAcotacion = search.branch_and_bound(problem2).path()
+print("\t\t-Coste total:", busquedaPorRamificacionAcotacion[0].get_path_cost())
+print(busquedaPorRamificacionAcotacion)
 
 #   Ramificación y acotación Subestimación
 print("---Busqueda por Ramificación y acotación CON heurística---")
-busquedaPorAnchuraAmplitudConHeuristica = search.branch_and_bound_subestimacion(problem2).path()
-print(busquedaPorAnchuraAmplitudConHeuristica)
-print("\t\t-Coste total:", busquedaPorAnchuraAmplitudConHeuristica[0].get_path_cost())
+busquedaPorRamificacionAcotacionConHeuristica = search.branch_and_bound_subestimacion(problem2).path()
+print(busquedaPorRamificacionAcotacionConHeuristica)
+print("\t\t-Coste total:", busquedaPorRamificacionAcotacionConHeuristica[0].get_path_cost())
 
 
 
@@ -91,15 +83,15 @@ print(busquedaPorProfundidad, "\n\n")
 
 #   Ramificación y acotación
 print("---Busqueda por Ramificación y acotación SIN heurística---")
-busquedaPorAnchuraAmplitud = search.branch_and_bound(problem3).path()
-print("\t\t-Coste total:", busquedaPorAnchuraAmplitud[0].get_path_cost())
-print(busquedaPorAnchuraAmplitud)
+busquedaPorRamificacionAcotacion = search.branch_and_bound(problem3).path()
+print("\t\t-Coste total:", busquedaPorRamificacionAcotacion[0].get_path_cost())
+print(busquedaPorRamificacionAcotacion)
 
 #   Ramificación y acotación Subestimación
 print("---Busqueda por Ramificación y acotación CON heurística---")
-busquedaPorAnchuraAmplitudConHeuristica = search.branch_and_bound_subestimacion(problem3).path()
-print(busquedaPorAnchuraAmplitudConHeuristica)
-print("\t\t-Coste total:", busquedaPorAnchuraAmplitudConHeuristica[0].get_path_cost())
+busquedaPorRamificacionAcotacionConHeuristica = search.branch_and_bound_subestimacion(problem3).path()
+print(busquedaPorRamificacionAcotacionConHeuristica)
+print("\t\t-Coste total:", busquedaPorRamificacionAcotacionConHeuristica[0].get_path_cost())
 
 
 problem4 = search.GPSProblem('N', 'D'
@@ -119,15 +111,15 @@ print(busquedaPorProfundidad, "\n\n")
 
 #   Ramificación y acotación
 print("---Busqueda por Ramificación y acotación SIN heurística---")
-busquedaPorAnchuraAmplitud = search.branch_and_bound(problem4).path()
-print("\t\t-Coste total:", busquedaPorAnchuraAmplitud[0].get_path_cost())
-print(busquedaPorAnchuraAmplitud)
+busquedaPorRamificacionAcotacion = search.branch_and_bound(problem4).path()
+print("\t\t-Coste total:", busquedaPorRamificacionAcotacion[0].get_path_cost())
+print(busquedaPorRamificacionAcotacion)
 
 #   Ramificación y acotación Subestimación
 print("---Busqueda por Ramificación y acotación CON heurística---")
-busquedaPorAnchuraAmplitudConHeuristica = search.branch_and_bound_subestimacion(problem4).path()
-print(busquedaPorAnchuraAmplitudConHeuristica)
-print("\t\t-Coste total:", busquedaPorAnchuraAmplitudConHeuristica[0].get_path_cost())
+busquedaPorRamificacionAcotacionConHeuristica = search.branch_and_bound_subestimacion(problem4).path()
+print(busquedaPorRamificacionAcotacionConHeuristica)
+print("\t\t-Coste total:", busquedaPorRamificacionAcotacionConHeuristica[0].get_path_cost())
 
 
 problem5 = search.GPSProblem('M', 'F'
@@ -147,13 +139,13 @@ print(busquedaPorProfundidad, "\n\n")
 
 #   Ramificación y acotación
 print("---Busqueda por Ramificación y acotación SIN heurística---")
-busquedaPorAnchuraAmplitud = search.branch_and_bound(problem5).path()
-print("\t\t-Coste total:", busquedaPorAnchuraAmplitud[0].get_path_cost())
-print(busquedaPorAnchuraAmplitud)
+busquedaPorRamificacionAcotacion = search.branch_and_bound(problem5).path()
+print("\t\t-Coste total:", busquedaPorRamificacionAcotacion[0].get_path_cost())
+print(busquedaPorRamificacionAcotacion)
 
 #   Ramificación y acotación Subestimación
 print("---Busqueda por Ramificación y acotación CON heurística---")
-busquedaPorAnchuraAmplitudConHeuristica = search.branch_and_bound_subestimacion(problem5).path()
-print(busquedaPorAnchuraAmplitudConHeuristica)
-print("\t\t-Coste total:", busquedaPorAnchuraAmplitudConHeuristica[0].get_path_cost())
+busquedaPorRamificacionAcotacionConHeuristica = search.branch_and_bound_subestimacion(problem5).path()
+print(busquedaPorRamificacionAcotacionConHeuristica)
+print("\t\t-Coste total:", busquedaPorRamificacionAcotacionConHeuristica[0].get_path_cost())
 

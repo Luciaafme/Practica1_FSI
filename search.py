@@ -122,7 +122,6 @@ def breadth_first_graph_search(problem):
     queue.getInfo()
     return search
 
-
 def depth_first_graph_search(problem):
     """Search the deepest nodes in the search tree first. [p 74]"""
     queue = Stack()
@@ -130,9 +129,8 @@ def depth_first_graph_search(problem):
     queue.getInfo()
     return search
 
-
 def branch_and_bound(problem):
-    cola = My_Fringe(problem)
+    cola = My_Fringe()
     search = graph_search(problem, cola)
     print(cola.getInfo())
     return search

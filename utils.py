@@ -565,25 +565,25 @@ class FIFOQueue:
 class Stack:
     """Return an empty list, suitable as a Last-In-First-Out Queue."""
     def __init__(self):
-        self.lista = []
+        self.abierta = []
         self.visitados = set()
         self.visitadosTotal = []
         self.expandidos = set()
         self.expandidosTotal = []
 
     def append(self, node):
-        self.lista.append(node)
+        self.abierta.append(node)
         self.expandidos.add(node.state)
         self.expandidosTotal.append(node.state)
 
     def extend(self, nodes):
-        self.lista.extend(nodes)
+        self.abierta.extend(nodes)
         for node in nodes:
             self.expandidos.add(node.state)
             self.expandidosTotal.append(node.state)
 
     def pop(self):
-        node = self.lista.pop()
+        node = self.abierta.pop()
         self.visitados.add(node.state)
         self.visitadosTotal.append(node.state)
         return node
@@ -598,9 +598,8 @@ class Stack:
 
 #SIN HEURÍSTICA
 class My_Fringe:
-    def __init__(self, problem):
+    def __init__(self):
         self.abierta = []
-        self.problem = problem
         self.expandidos = set()
         self.visitados = set()
         self.expandidosTotal = []
